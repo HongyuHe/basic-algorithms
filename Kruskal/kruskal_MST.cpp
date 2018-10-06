@@ -32,9 +32,9 @@ class Graph {
   Graph(int V, int E);
   ~Graph();
 
-  int  get_V_(void);
-  int  get_E_(void);
-  struct Edge* get_edges_(void);
+  int  get_V_(void) const;
+  int  get_E_(void) const;
+  struct Edge* get_edges_(void) const;
   void set_edges_(int index, int src, int dest, int weight);
 
  private:
@@ -50,13 +50,14 @@ class KruskalMST {
 
   void Union(int subtreeA, int subtreeB, struct Subtree *ranked_tree_);
   int  FindTreeRoot(struct Subtree *ranked_tree_, int vertex);
-  static int  SortWeight(const void* e_1, const void* e_2);
   bool IsCycle(struct Edge* edges, int i);
   void BuidMST(Graph* graph);
 
  private:
   struct Subtree* ranked_tree_;	//A ranked tree for union-find-by-rank;
   struct Edge* MST_edges_; //The result;
+
+  static int  SortWeight(const void* e_1, const void* e_2);
 };
 
 // Driver program to test functions:
@@ -97,13 +98,13 @@ void Graph::set_edges_(int index, int src, int dest, int weight) {
 	edges_[index].weight = weight;
 }
 
-int  Graph::get_V_(void) {
+int  Graph::get_V_(void) const {
 	return V_;
 }
-int  Graph::get_E_(void) {
+int  Graph::get_E_(void) const {
 	return E_;
 }
-struct Edge* Graph::get_edges_(void) {
+struct Edge* Graph::get_edges_(void) const {
 	return edges_;
 }
 
