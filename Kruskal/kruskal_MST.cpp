@@ -1,13 +1,13 @@
 /*================================================================
  *   Copyright (C) 2018 He Hongyu(Ray). All rights reserved.
  *
- *   FileName   ：kruskal_MST.cpp
- *   Author     ：He Hongyu (Ray)
- *   Date       ：2018-10-05
+ *   FileName   : kruskal_MST.cpp
+ *   Author     : He Hongyu (Ray)
+ *   Date       : 2018-10-05
  *   Description：C++ program for Kruskal's algorithm to find Minimum Spanning Tree
-				  of a given connected, undirected and weighted graph
- *   Email		: hongyu.he@hotmail.com
- *	 GitHub		: https://github.com/HongyuHe
+		 of a given connected, undirected and weighted graph
+ *   Email	: hongyu.he@hotmail.com
+ *   GitHub	: https://github.com/HongyuHe
  ================================================================*/
 #include <iostream>
 #include <cstring>
