@@ -6,8 +6,8 @@
  *   Date       : 2018-10-18
  *   Description: C++ program for Prim's MST for adjacency list
  				 representation of graph
- *   Email		: hongyu.he@hotmail.com
- *   GitHub		: https://github.com/HongyuHe
+ *   Email	: hongyu.he@hotmail.com
+ *   GitHub	: https://github.com/HongyuHe
  ================================================================*/
 
  #include <unordered_set>
@@ -87,6 +87,9 @@
  	Prim* prim = new Prim(V);
  	prim->BuidMST(graph, 0);
 
+	delete graph;
+	delete prim;
+
  	return 0;
  }
 
@@ -96,8 +99,8 @@
  	minheap_ = new MinHeap();
  }
  Prim::~Prim() {
- 	delete[] MST_;
- 	delete[] minheap_;
+ 	delete MST_;
+ 	delete minheap_;
  }
 
  void Prim::BuidMST(Graph* graph, int src) {
@@ -134,7 +137,7 @@
  	adjList_ = new list<struct AdjNode>[V_];
  }
  Graph::~Graph() {
- 	delete adjList_;
+ 	delete[] adjList_;
  }
  void Graph::set_V_(int V) {
  	V_ = V;
@@ -149,7 +152,7 @@
  list<struct AdjNode>* Graph::get_adjList_() const {
  	return adjList_;
  }
- 
+
  /*--------------------- AdjNode -----------------------*/
  AdjNode::AdjNode(int dest, int wt) {
  	index = dest;
