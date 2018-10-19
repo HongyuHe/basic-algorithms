@@ -6,8 +6,8 @@
  *   Date       : 2018-10-18
  *   Description: C++ program for Dijkstra's shortest path algorithm for adjacency
 			 	 list representation of graph
- *   Email		: hongyu.he@hotmail.com
- *   GitHub		: https://github.com/HongyuHe
+ *   Email	: hongyu.he@hotmail.com
+ *   GitHub	: https://github.com/HongyuHe
  ================================================================*/
 
 #include <unordered_set>
@@ -87,6 +87,9 @@ int main ()
 	dijkstra->BuidSPT(graph, 0);
 	dijkstra->ShowSPT();
 
+	delete graph;
+	delete dijkstra;
+
 	return 0;
 }
 
@@ -99,9 +102,9 @@ Dijkstra::Dijkstra(int V) {
 	dist_relax_->assign(V, INT_MAX);
 }
 Dijkstra::~Dijkstra() {
-	delete[] SPT_;
-	delete[] dist_relax_;
-	delete[] minheap_;
+	delete SPT_;
+	delete dist_relax_;
+	delete minheap_;
 }
 
 void Dijkstra::BuidSPT(Graph* graph, int src) {
@@ -146,10 +149,10 @@ void Dijkstra::ShowSPT() const {
 /*--------------------- Graph -----------------------*/
 Graph::Graph(int V) {
 	V_ = V;
-	adjList_ = new list<struct AdjNode>[V_]; 
+	adjList_ = new list<struct AdjNode>[V_];
 }
 Graph::~Graph() {
-	delete adjList_;
+	delete[] adjList_;
 }
 void Graph::set_V_(int V) {
 	V_ = V;
