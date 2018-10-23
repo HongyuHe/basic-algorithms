@@ -59,9 +59,10 @@ class Dijkstra {
   void BuidSPT(Graph* graph, int src);
   void ShowSPT() const;
  private:
-  unordered_set<int>* SPT_; //Target tree;
-  MinHeap* minheap_;
-  vector<int>* dist_relax_;
+  unordered_set<int>* SPT_; //Target SPT tree;
+  MinHeap* minheap_; // A priority queue for selecting next path;
+  vector<int>* relax_table_; // Store the current shortest path
+  							// from sourse to each vertex;
 };
 // Driver program to test above functions;
 int main ()
@@ -96,42 +97,44 @@ int main ()
 /*--------------------- Dijkstra -----------------------*/
 Dijkstra::Dijkstra(int V) {
 	SPT_ = new unordered_set<int>;
-	dist_relax_ = new vector<int>(V);
+	relax_table_ = new vector<int>(V);
 	minheap_ = new MinHeap();
 
-	dist_relax_->assign(V, INT_MAX);
+	relax_table_->assign(V, INT_MAX);
 }
 Dijkstra::~Dijkstra() {
 	delete SPT_;
-	delete dist_relax_;
+	delete relax_table_;
 	delete minheap_;
 }
 
 void Dijkstra::BuidSPT(Graph* graph, int src) {
 	list<struct AdjNode>* adj = graph->get_adjList_();
-	minheap_->push(AdjNode(src, 0));
-	dist_relax_->at(src) = 0;
+	minheap_->push(AdjNode(src, 0)); // Start from source whose distance is 0;
+	relax_table_->at(src) = 0;
 
 	struct AdjNode cur_src;
-	int cur_dist = 0;
-	while (!minheap_->empty()) { //BFS
+	int cur_dist = 0; // The current distance
+					// from where we are standing to the source;
+	while (!minheap_->empty()) {
+		//BFS
 		cur_src = minheap_->top();
 		minheap_->pop();
-		//new source should not already in our SPT;
+		//new source (next vertex) should not already in our SPT;
 		if (SPT_->find(cur_src.index) != SPT_->end())
 			continue;
 		cout << cur_src.index << "→";
-		SPT_->insert(cur_src.index); //Add into SPT(the target tree)
-		cur_dist = dist_relax_->at(cur_src.index);
+		//Add new source (next vertex) into SPT(the target tree);
+		SPT_->insert(cur_src.index);
+		cur_dist = relax_table_->at(cur_src.index); // Update where we are standing;
 
-		for (auto node:adj[cur_src.index]) {
-			minheap_->push(AdjNode(node.index,
-								   node.weight + cur_dist));
-								 //Add the distance from source rather than the weight of the edge;
-			if (dist_relax_->at(node.index) >
-			   cur_dist + node.weight) {
-				dist_relax_->at(node.index) =
-				 cur_dist + node.weight; //Relaxation
+		for (auto next_v:adj[cur_src.index]) {
+			int new_distance = next_v.weight + cur_dist;
+			int old_distance = relax_table_->at(next_v.index);
+			//Add the distance from source rather than the weight of the next edge;
+			minheap_->push(AdjNode(next_v.index, new_distance));
+			if (old_distance > new_distance) {
+				relax_table_->at(next_v.index) = new_distance; //Relaxation;
 			}
 		}
 	}
@@ -140,9 +143,9 @@ void Dijkstra::BuidSPT(Graph* graph, int src) {
 
 void Dijkstra::ShowSPT() const {
 	cout << "Minimum distance to each vertex: " << endl;
-	for (int i = 0; i < dist_relax_->size(); i++) {
+	for (int i = 0; i < relax_table_->size(); i++) {
 		cout << "("  << i << ") " << " ✈  "
-			 << dist_relax_->at(i) << endl;
+			 << relax_table_->at(i) << endl;
 	}
 }
 
