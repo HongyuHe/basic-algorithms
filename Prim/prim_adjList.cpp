@@ -6,8 +6,8 @@
  *   Date       : 2018-10-18
  *   Description: C++ program for Prim's MST for adjacency list
  				 representation of graph
- *   Email	: hongyu.he@hotmail.com
- *   GitHub	: https://github.com/HongyuHe
+ *   Email		: hongyu.he@hotmail.com
+ *   GitHub		: https://github.com/HongyuHe
  ================================================================*/
 
  #include <unordered_set>
@@ -109,23 +109,25 @@
 
 	pair<int, struct AdjNode> cur_edge;
  	struct AdjNode cur_src;
- 	while (!minheap_->empty()) { //BFS
+	//BFS;
+ 	while (!minheap_->empty()) {
  		cur_edge = minheap_->top();
  		minheap_->pop();
 		cur_src = get<1>(cur_edge);
-
- 		//new source should not already in our MST;
+		//new source (next index) should not already in our MST;
  		if (MST_->find(cur_src.index) != MST_->end())
  			continue;
-		MST_->insert(cur_src.index); //Add into MST(the target tree)
+		//Add new source (next index) into MST(the target tree)
+		MST_->insert(cur_src.index);
  		cout << "MST Edge: " << get<0>(cur_edge)
 			 << "-" 		 << cur_src.index
 			 << " Weight:" 	 << cur_src.weight
 			 << endl;
 
- 		for (auto vertex:adj[cur_src.index]) {
+ 		for (auto next_v:adj[cur_src.index]) {
  			minheap_->push( make_pair(cur_src.index,
-							  	AdjNode(vertex.index, vertex.weight)) );
+									  AdjNode(next_v.index,
+									  		  next_v.weight)) );
  			//Add all adjent edges to priority_queue;
  			}
  	}
@@ -155,6 +157,6 @@
 
  /*--------------------- AdjNode -----------------------*/
  AdjNode::AdjNode(int dest, int wt) {
- 	index = dest;
+ 	index = dest; 
  	weight = wt;
  }
