@@ -4,7 +4,7 @@
  *   FileName   : dijkstra_adjList.cpp
  *   Author    	: He Hongyu (Ray)
  *   Date       : 2018-10-18
- *   Description: C program for Prim's MST for adjacency list 
+ *   Description: C program for Prim's MST for adjacency list
  				 representation of graph
  *   Email		: hongyu.he@hotmail.com
  *   GitHub		: https://github.com/HongyuHe
@@ -12,7 +12,7 @@
 
 #include <limits.h>
 #include <stdio.h>
-#include <stdlib.h>
+#include <stdlib.h> 
 
 // A structure to represent a node in adjacency list
 struct AdjListNode {

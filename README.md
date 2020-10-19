@@ -1,2 +1,2 @@
-# BasicAlgorithms
-Review some basic algorithms and write some sample code for our [Breakfast Search] association
+# Basic Algorithms
+Sample code for the [Breakfast Search](https://hongyuhe.github.io/breakfast-search) club

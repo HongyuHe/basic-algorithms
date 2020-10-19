@@ -6,8 +6,8 @@
  *   Date       : 2018-10-18
  *   Description: C++ program for Prim's MST for adjacency list
  				 representation of graph
- *   Email		: hongyu.he@hotmail.com
- *   GitHub		: https://github.com/HongyuHe
+ *   Email	: hongyu.he@hotmail.com
+ *   GitHub	: https://github.com/HongyuHe 
  ================================================================*/
 
  #include <unordered_set>
@@ -157,6 +157,6 @@
 
  /*--------------------- AdjNode -----------------------*/
  AdjNode::AdjNode(int dest, int wt) {
- 	index = dest; 
+ 	index = dest;
  	weight = wt;
- }
+ } 
